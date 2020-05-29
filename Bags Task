@@ -1,0 +1,43 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace meshochki
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Enter number of bags:");
+            int bagCount = Int32.Parse(Console.ReadLine());
+
+            Random rand = new Random();
+            int randomBag = rand.Next(0, bagCount - 1);
+            int idealWeight = 100;
+            int fakeWeight = 90;
+            int procentFromIdealNumber = idealWeight - fakeWeight;
+
+            int[] massBag = new int[bagCount];
+            double sum = 0;
+            double sumIdeal = 0;
+
+
+            for (int i = 0; i < massBag.Length; i++)
+            {
+                massBag[i] = idealWeight;
+                sumIdeal += (double)massBag[i] / (i + 1);
+            }
+            massBag[randomBag] = fakeWeight;
+
+            for (int i = 0; i < massBag.Length; i++)
+            {
+                sum += (double)massBag[i] / (i + 1);
+            }
+
+            double result = Math.Round(procentFromIdealNumber / (sumIdeal - sum));
+            Console.WriteLine("Number of fake bag: " + result);
+        }
+    }
+}
